@@ -1,0 +1,76 @@
+/**************************/
+/**************************/
+/**                      **/
+/**  Animate On Scroll   **/
+/**                      **/
+/**************************/
+/**************************/
+
+/* 
+ *
+ *@desc when edit mode is active show elements
+ *
+*/
+
+.sqs-edit-mode-active{
+  .is-initialized{
+    opacity:1 !important;
+  }
+  .sqs-block{
+    opacity:1 !important;
+    transform:rotateY(0deg) !important;
+  }
+  .sqs-col-4, .sqs-col-6{
+    opacity:1 !important;
+  }
+}
+
+/* 
+ *
+ *@desc add animations when is-visible class is triggered
+ *
+*/
+
+#page{
+  .sqs-col-4, .sqs-col-6{
+     opacity:0;
+     &.is-visible{
+       animation:slideRight 0.4s ease-in-out forwards;
+       -webkit-animation:slideRight 0.4s ease-in-out forwards;
+     } 
+     @media screen and (max-width:1024px){
+     width:100% !important;
+     .intrinsic{
+       max-height:300px !important;
+       max-width:100%;
+       overflow:hidden;
+       img{
+         position:static !important;
+         height:auto !important;
+         width:100% !important;
+       }
+     }
+   }
+   .sqs-block-button-element--small{
+     backface-visibility:hidden;
+   }
+   &.is-visible{
+     .sqs-block-button-element--small{
+       opacity:0;
+       backface-visibility:hidden;
+       animation:fadeIn linear 0.6s forwards;
+       -webkit-animation:fadeIn linear 0.6s forwards;
+       animation-delay:1s;
+     }
+   }
+  }
+
+  .sqs-block{
+    opacity:0;
+    &.is-visible{
+      animation:fadeUp 0.4s ease-in-out forwards;
+      -webkit-animation:fadeUp 0.4s ease-in-out forwards;
+    }
+  }
+}
+
