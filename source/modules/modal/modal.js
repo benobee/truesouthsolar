@@ -7,8 +7,17 @@ const modal = {
 
 		if (this.$target) {
 			this.createModalInjectElement();
+			this.cacheDOM();
 			this.events();
 		}
+	},
+	cacheDOM() {
+		const $modal = $('#app-module-modal');
+
+		this.modalContainer = $modal;
+		this.modalBody = $modal.find('.modal-container');
+		this.injectPoint = $modal.find('#modal-content-inject');
+		this.closeButton = $modal.find('.close');
 	},
 	createModalInjectElement() {
 
@@ -82,37 +91,54 @@ const modal = {
 
 		Component.render(modalContent, target);
 	},
-	events() {
-
+	closeModal() {
 		/*
-		 * all events realted to the modal
+		 * sequence of events that happen when the modal
+		 * is closed
 		*/
+	
+		this.modalContainer.removeClass("active");
+		this.clearModal();
+		this.clearEvents();
+	},
+	modalEvents() {
+		/*
+		 * click on X or the modal container to close modal
+		 * clicking on the modal itself is prevented from stop
+		 * propagation
+		*/
+	
+		$(this.closeButton).on("click", () => {
+			this.closeModal();
+		});
+		
+		$(this.modalContainer).on("click", () => {
+			this.closeModal();
+		});
+
+		$(this.modalBody).on("click", (e) => {
+			e.stopPropagation(); //prevent modal from closing when clicked on
+		});
+	},
+	clearEvents() {
+		$(this.closeButton).off();
+		$(this.modalContainer).off();
+		$(this.modalBody).off();
+	},
+	events() {
 	    
-	    //look for sepcified content within the clicked
-	    //elemnt and append to modal
+	    /*
+	     * look for sepcified content within the clicked
+	     * elemnt and append to modal
+	    */
+
 		$(this.$target).find(".summary-item").on("click", (e) => {
 			e.preventDefault();
 
-			$('#app-module-modal').addClass("active");
+			this.modalContainer.addClass("active");
 			this.clearModal();
 			this.appendModal(e.currentTarget);
-		});
-
-		//prevent modal from closing when clicked on
-		$('.modal-container').on("click", (e) => {
-			e.stopPropagation();
-		});
-
-		//click X to close modal
-		$('#app-module-modal .close').on("click", () => {
-			$('#app-module-modal').removeClass("active");
-			this.clearModal();
-		});
-
-		//click body to close modal
-		$('#app-module-modal').on("click", () => {
-			$('#app-module-modal').removeClass("active");
-			this.clearModal();
+			this.modalEvents();
 		});
 	}
 };
