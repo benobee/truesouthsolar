@@ -22,8 +22,6 @@ class Template {
 		this.renderInnerContent(strings, exp);
 		this.parseAttributes(strings, exp);
 		this.uniqueId();
-
-		console.log(this);
 	}
 	uniqueId() {
 
@@ -71,22 +69,21 @@ class Template {
 		const innerContent = exp[ exp.length - 1 ];
 		const variableTYPE = (typeof innerContent);
 
-		if (exp.legnth > 0) {
-			if (variableTYPE === "string") {
-			    this.root.innerHTML = this.staticHTML;
-			} else if (variableTYPE === "object") {
-			    if (Array.isArray(innerContent)) {
-			        const joined = innerContent.map((item) => {
-			        	return item.innerHTML;
-			        }).join("");
+		if (variableTYPE === "string") {
+		    this.root.innerHTML = this.staticHTML;
+		} else if (variableTYPE === "object") {
+			if (Array.isArray(innerContent)) {
+			    const joined = innerContent.map((item) => {
+			    	return item.innerHTML;
+			}).join("");
 
-	 				this.staticHTML = joined;
-			        this.root.innerHTML = joined;
-			    }
-			} else {
-			   	console.error("COMPONENT ERROR: Needs to be a string or object...");
+	 			this.staticHTML = joined;
+			    this.root.innerHTML = joined;
 			}
+		} else {
+		   	console.error("COMPONENT ERROR: Needs to be a string or object...");
 		}
+
 	}
 	formatString(str) {
 
@@ -181,7 +178,6 @@ Component.list = List; //append all elements to root component in core
 
 Component.render = (element, target) => {
 	if (target) {
-		console.log(target, element);
 		target.appendChild(element);
 	} else {
 		console.error("COMPONENT ERROR: Needs to be a valid DOM element.");

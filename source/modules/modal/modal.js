@@ -36,7 +36,7 @@ const modal = {
 		 * rendering area.
 		*/
 
-		$('#modal-content-inject').html("");
+		$('#modal-content-inject').html('');
 	},
 	appendModal(content) {
 
@@ -70,7 +70,7 @@ const modal = {
 
 		const link = $(html[ 0 ]).attr("href");
 
-		const modalContent = `
+		const modalContent = Component `
 			<div class="modal-inner">
 				<div class="logo">${html[ 2 ]}</div>
 				<div class="excerpt">${html[ 1 ]}</div>
@@ -78,8 +78,9 @@ const modal = {
 			</div>
 		`;
 
-		$('#modal-content-inject').html(modalContent);
+		const target = document.getElementById('modal-content-inject');
 
+		Component.render(modalContent, target);
 	},
 	events() {
 
