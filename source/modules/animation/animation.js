@@ -6,7 +6,8 @@
 */
 
 import $ from 'jquery';
-import scrollMap from '../scrollmap/scrollMap.js';
+import { Scrollmap, Trigger } from '../../core/scrollmap/index.js';
+import { TweenMax, Power2, TimelineLite } from "gsap";
 
 /**
  *
@@ -18,19 +19,35 @@ import scrollMap from '../scrollmap/scrollMap.js';
 
 const animation = {
     init() {
+        this.summaryItemList();
         this.map();
+    },
+    summaryItemList() {
+        const elementsToAnimate = $('#partnerships .summary-item-list, #products-intro .summary-item-list, #services-intro .summary-item-list').toArray();
 
-        this.scrollMap = scrollMap;
+        elementsToAnimate.forEach((item) => {
+
+            const trigger = new Trigger(item, () => {
+                const summaryItems = $(item).find(".summary-item").toArray();
+
+                TweenMax.staggerTo(summaryItems, 0.8, { opacity: 1 }, 0.1);
+            });
+
+            Scrollmap.add(trigger); //add the item and class to be triggered           
+        });
     },
     map() {
-        scrollMap.init();
+        const elementsToAnimate = $('.Index-page, #why-true-south-solar .summary-item').toArray();
 
-        const block = $('#page .sqs-block, #page .sqs-col-4, #page .sqs-col-6').toArray();
+        elementsToAnimate.forEach((item) => {
+            const trigger = new Trigger(item, () => {
+                $(item).addClass("on-scroll");
+            });
 
-        $.each(block, (i, item) => {
-           scrollMap.add(item, 'is-initialized');
+            Scrollmap.add(trigger); //add the item and class to be triggered
         });
     }
 };
 
 export default animation;
+

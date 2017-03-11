@@ -1,7 +1,5 @@
-import blog from "./blog.js";
-import products from './products.js';
+import products from './products';
 
 export {
-	blog,
 	products
 };

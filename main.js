@@ -4,11 +4,12 @@
  *
 */
 
-import * as core from './source/core/index.js';
-import { Router } from './source/core/index.js';
-import * as modules from './source/modules/index.js';
-import SQS from './source/sqs/index.js';
-import * as Collections from './source/collections/index.js';
+import * as core from './source/core';
+import { Router, Scrollmap } from './source/core';
+import * as modules from './source/modules';
+import SQS from './source/sqs';
+import * as Collections from './source/collections';
+import $ from 'jquery';
 
 const css = require('./main.less');
 
@@ -20,6 +21,7 @@ class App_Build {
 		this.SQS = SQS;
 		this.componentsToSessionStorage();
 		
+		// initialize modules and core methods
 		this.init();
 
 		console.log(this);
@@ -30,13 +32,16 @@ class App_Build {
 		});
 	}
 	init() {
+		/* scrollmap*/
+		Scrollmap.init();
+
 		/* router */
 		Router.init();
 
-		/* animation listeners */
+		/* modules */
 		modules.animation.init();
 		modules.carousel.init();
-		modules.modal.init();
+		modules.modal.init();			
 	}
 }
 

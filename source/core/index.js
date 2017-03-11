@@ -6,14 +6,15 @@
  *
  */
 
-import Controller from "./controller.js";
-import Events from "./events.js";
-import HTTP from "./http.js";
-import Cookie from "./cookie.js";
-import Session from "./session.js";
-import Collection from "./collection.js";
-import Router from "./router.js";
-import Component from "./component.js";
+import Controller from "./controller";
+import Events from "./events";
+import HTTP from "./http";
+import Cookie from "./cookie";
+import Session from "./session";
+import Collection from "./collection";
+import Router from "./router";
+import Component from "./component";
+import Scrollmap from "./scrollmap/scrollmap";
 
 export {
 	Controller,
@@ -23,5 +24,6 @@ export {
 	HTTP,
 	Collection,
 	Component,
-	Router
+	Router,
+	Scrollmap
 };
