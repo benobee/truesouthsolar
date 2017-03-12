@@ -74,7 +74,7 @@ const homepage = {
 
         Scrollmap.add(target, {
             onTriggerIn() {
-                const summaryItems = $(this.element).find(".summary-item").toArray();
+                const summaryItems = $(this.element).find(".summary-item");
 
                 TweenMax.staggerTo(summaryItems, 0.8, { opacity: 1 }, 0.1);
             },
@@ -88,7 +88,7 @@ const homepage = {
 
         Scrollmap.add(target, {
             onTriggerIn() {
-                TweenMax.to(target, 0.4, { y: 0, opacity: 1 });
+                TweenMax.to(target, 0.3, { y: 0, opacity: 1 });
             },
             surfaceVisible: 0.5
         });
@@ -100,7 +100,7 @@ const homepage = {
 
         Scrollmap.add(target, {
             onTriggerIn() {
-                const summaryItems = $(this.element).find(".summary-item").toArray();
+                const summaryItems = $(this.element).find(".summary-item");
 
                 TweenMax.staggerTo(summaryItems, 0.8, { opacity: 1 }, 0.1);
             }
@@ -125,7 +125,7 @@ const homepage = {
 
         Scrollmap.add(target, {
             onTriggerIn() {
-                const summaryItems = $(this.element).find(".summary-item").toArray();
+                const summaryItems = $(this.element).find(".summary-item");
 
                 TweenMax.staggerTo(summaryItems, 0.8, { opacity: 1 }, 0.1);
             },
