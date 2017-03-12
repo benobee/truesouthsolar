@@ -38,9 +38,14 @@ class App_Build {
 		/* router */
 		Router.init();
 
-		/* modules */
-		modules.animation.init();
+		/* animations */
+		modules.animation.homepage.init();
+		modules.animation.products.init();
+
+		/* carousel init (testimonials) */
 		modules.carousel.init();
+
+		/* modal init (products) */
 		modules.modal.init();			
 	}
 }

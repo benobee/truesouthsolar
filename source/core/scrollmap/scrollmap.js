@@ -15,15 +15,33 @@ const Scrollmap = {
 
     this.events();
   },
-  add(el) {
+  add(el, callback) {
 
   	/* 
   	 * @desc add classname indicating element is intialized
     */
+   
+    const type = (typeof el);
 
-    this.points.push(el);
+    if (type === "string") {
+        el = document.querySelectorAll(el);
+    } else if (typeof jQuery === "function" && el instanceof jQuery) {
+        el = el.toArray();
+    } else if ( type === "object" ) {
+        el = [el];
+    }
+
+    el.forEach((item) => {
+        const currentClass = item.getAttribute('class');
+
+        item.setAttribute("class", currentClass + " on-scroll");
+
+        const point = new Trigger(item, callback);
+
+        this.points.push(point);
+    });
   },
-  elementInViewport(el) {
+  elementInViewport(el, percetageOfElement) {
 
     /*
      * @desc check if element is in viewport
@@ -36,44 +54,44 @@ const Scrollmap = {
       el = el[ 0 ];
     }
 
+    // return (
+    //     rect.top >= 0 &&
+    //     rect.left >= 0 &&
+    //     rect.bottom / 2 * percetageOfElement <= (window.innerHeight || document.documentElement.clientHeight) /*or $(window).height() */
+    //     rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+    // );
+    
     return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom * 0.85 <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.top + (rect.height * percetageOfElement) <= (window.innerHeight || document.documentElement.clientHeight ) /*or $(window).height() */
     );
 
   },
-  checkVisible() {
-    this.points.forEach((item) => {
+  checkVisible(point) {
+    const targetElement = point.element;
+    const viewport = this.elementInViewport(targetElement, point.surfaceVisible);
 
-        const targetElement = item.element;
+    if (viewport) {
+      $(targetElement).addClass('is-visible');
+      point.onTriggerIn();
+      if (point.onTriggerIn) {
+        point.onTriggerIn();
+      }
 
-        /* look for is-visible class on element
-        and assign booleon */
+    } else {
+      $(targetElement).removeClass('is-visible');
 
-        const isVisible = $(targetElement).hasClass('is-visible');
-
-        /* if element doesn't have is-visible class
-        check to see if in viewport from coords.top */
-
-        if (!isVisible) {
-          //const isInViewport = this.isInViewport(item.coords.top);
-          const viewport = this.elementInViewport(targetElement);
-
-          /* if booleon return true add visible class */
-          if (viewport) {
-            $(targetElement).addClass('is-visible');
-            item.controller();
-          }
-        }
-    });    
+      if (point.onTriggerOut) {
+        point.onTriggerOut();
+      }
+    }
   },
   events() {
   	//initial check on page load to see if elements are visible
-    $(window).bind('scroll load', () => {
-      this.points.forEach((i, item) => {
-        this.checkVisible();
+    $(window).bind('scroll load resize', () => {
+      this.points.forEach((point) => {
+        this.checkVisible(point);
       });
     });
   }

@@ -6,9 +6,9 @@
  *
  */
 
-import animation from "./animation/animation.js";
-import carousel from "./carousel/carousel.js";
-import modal from "./modal/modal.js";
+import * as animation from "./animation";
+import carousel from "./carousel/carousel";
+import modal from "./modal/modal";
 
 export {
 	animation,

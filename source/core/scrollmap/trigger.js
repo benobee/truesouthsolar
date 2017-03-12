@@ -1,9 +1,13 @@
 import $ from 'jquery';
 
 class Trigger {
-	constructor(element, callback) {
+	constructor(element, options) {
 		this.element = element;
-		this.controller = callback;
+		this.surfaceVisible = 1;
+
+		if (options) {
+			Object.assign(this, options);
+		}
 	}
 	destroy() {
 		this.events = null;

@@ -2,12 +2,6 @@
 #welcome{
   border-top:4px solid @cool;
   border-bottom:4px solid @cool;
-  &.is-visible{
-     .sqs-layout{
-        animation:fadeSlideUp 0.3s forwards;
-        animation-delay:1.3s;
-     }        
-  }
   .Index-page-content{
       .sqs-layout {
         opacity:0;
@@ -107,27 +101,16 @@
            pointer-events:none;
            flex-wrap:wrap;
            -webkit-flex-wrap:wrap;
-           &.is-visible{
-             .summary-content{
-                animation:fadeUp 0.6s forwards;
-               -webkit-animation:fadeUp 0.6s forwards;
-             }
-             .summary-thumbnail-container{
-               animation:fadeScaleIn 0.4s ease-in-out forwards;
-               -webkit-animation:fadeScaleIn 0.4s ease-in-out forwards;
-               animation-delay:0.3s;
-             }
-           }
            @media screen and (min-width: 769px){
                height:50vh;
                min-height:350px;
                .summary-content{
-                   opacity:0;
+                  opacity:0;
               }
               .summary-thumbnail-container{
                   opacity:0;
               }
-                .summary-thumbnail.img-wrapper{
+              .summary-thumbnail.img-wrapper{
                  padding:4em !important;
               }
            }
@@ -215,13 +198,6 @@
             cursor:pointer;
             border-bottom:3px solid @dark;
             opacity:0;
-           //  &.is-visible{
-           //   .summary-content{
-           //     //  animation:fadeScaleIn 0.6s forwards;
-           //     // -webkit-animation:fadeScaleIn 0.6s forwards;
-           //     // animation-delay:0.3s;
-           //   }
-           // }
             .summary-thumbnail-container{
                .summary-thumbnail{
                   background:black;
@@ -294,12 +270,6 @@
 ///*    TESTIMONIALS    *////
 #testimonials-intro{
   height:600px;
-  &.is-visible{
-    .Index-page-content{
-        animation:fadeUp 0.4s ease-in-out forwards;
-        -webkit-animation:fadeUp 0.4s ease-in-out forwards;
-    }
-  }
   .Index-page-content{
     opacity:0;
     transition:opacity 0.6s;
@@ -346,10 +316,6 @@
 #products-intro{
   .summary-item{
     opacity:0;
-    // &.is-visible{
-    //      animation:fadeScaleIn 0.4s ease-in-out forwards;
-    //   -webkit-animation:fadeScaleIn 0.4s ease-in-out forwards;
-    // }
   }
   .summary-excerpt{
     display:none;
@@ -358,12 +324,6 @@
 
 //////*  TEAM  *///////
 #team-intro{
-  &.is-visible{
-    .Index-page-content{
-        animation:fadeUp 0.4s ease-in-out forwards;
-        -webkit-animation:fadeUp 0.4s ease-in-out forwards;
-    }
-  }
   .Index-page-content{
      opacity:0;
   }
