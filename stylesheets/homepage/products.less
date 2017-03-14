@@ -1,8 +1,19 @@
-#products-intro{
-  .summary-item{
-    opacity:0;
-  }
-  .summary-excerpt{
-    display:none;
-  }
+#products-intro {
+    .summary-item {
+        opacity: 0;
+        box-shadow: 1px 3px 8px #c1c1c1;
+        border-bottom: 3px solid;
+        border-color: rgba(0,0,0,0);
+        transition: border-color 0.2s;
+        &:hover {
+            border-color: @brand-color;
+        }
+        .summary-thumbnail-container {
+            transition: opacity 0.3s;
+            padding: 3em;
+        }
+    }
+    .summary-excerpt {
+        display: none;
+    }
 }

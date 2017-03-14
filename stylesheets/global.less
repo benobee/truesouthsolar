@@ -1,0 +1,27 @@
+/* all hidden content is visible when editing */
+.sqs-edit-mode-active{
+  	.on-scroll{
+    	opacity:1 !important;
+  	}
+  	.summary-item{
+  		opacity:1 !important;
+      .summary-thumbnail-container{
+        opacity:1 !important;
+      }
+      .summary-content{
+        opacity:1 !important;
+      }
+  	}
+}
+
+/* all hidden content is visible on mobile */
+@media screen and (max-width:768px){
+  	.summary-item{
+    	opacity:1 !important;
+  	}
+}
+
+/* medium call to action button */
+.sqs-block-button-element--medium{
+  	box-shadow:0 3px 0 @dark !important;
+}

@@ -1,7 +1,9 @@
 import homepage from './homepage';
-import products from './products';
+import productIndex from './productIndex';
+import productPages from './productPages';
 
 export {
 	homepage,
-	products
+	productIndex,
+	productPages
 };

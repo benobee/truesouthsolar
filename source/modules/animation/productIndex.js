@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import { Scrollmap, Trigger } from '../../core/scrollmap/index.js';
-import { TweenMax, Power2, TimelineLite } from "gsap";
+import { TweenMax } from "gsap";
 
-const products = {
+const productIndex = {
 	init() {
 		this.collection = $('#collection-58c07ee7cd0f68cc571c8464');
 		this.indexPages();
@@ -26,7 +26,7 @@ const products = {
 	evenIndexPages() {
 		const target = $(this.collection).find('.Index-page:nth-child(even)');
 
-		TweenMax.set(target.find('p, .sqs-block-button-element--medium'), { x: -100, opacity: 0 });
+		TweenMax.set(target.find('p, .sqs-block-button-element--medium'), { x: -50, opacity: 0 });
 
 		Scrollmap.add(target, {
 			onTriggerIn() {
@@ -40,7 +40,7 @@ const products = {
 	oddIndexPages() {
 		const target = $(this.collection).find('.Index-page:nth-child(odd)');
 
-		TweenMax.set(target.find('p, .sqs-block-button-element--medium'), { x: 100, opacity: 0 });
+		TweenMax.set(target.find('p, .sqs-block-button-element--medium'), { x: 50, opacity: 0 });
 
 		Scrollmap.add(target, {
 			onTriggerIn() {
@@ -53,4 +53,4 @@ const products = {
 	}
 };
 
-export default products;
+export default productIndex;

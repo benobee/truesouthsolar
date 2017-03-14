@@ -77,13 +77,13 @@ const modal = {
 			return itemHTML;
 		});
 
-		const link = $(html[ 0 ]).attr("href");
+		const link = $(html[ 0 ]).attr("href").replace("/products", "");
 
 		const modalContent = Component `
 			<div class="modal-inner">
 				<div class="logo">${html[ 2 ]}</div>
 				<div class="excerpt">${html[ 1 ]}</div>
-				<div class="title"><a href="${link}">Learn More about ${$(title).html()}</a></div>
+				<div class="title"><a href="${link}">Learn More</a></div>
 			</div>
 		`;
 

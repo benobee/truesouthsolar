@@ -8,14 +8,12 @@ import * as core from './source/core';
 import { Router, Scrollmap } from './source/core';
 import * as modules from './source/modules';
 import SQS from './source/sqs';
-import * as Collections from './source/collections';
 import $ from 'jquery';
 
 const css = require('./main.less');
 
 class App_Build {
 	constructor() {
-		this.collections = Collections;
 		this.core = core;
 		this.modules = modules;
 		this.SQS = SQS;
@@ -40,7 +38,8 @@ class App_Build {
 
 		/* animations */
 		modules.animation.homepage.init();
-		modules.animation.products.init();
+		modules.animation.productIndex.init();
+		modules.animation.productPages.init();
 
 		/* carousel init (testimonials) */
 		modules.carousel.init();

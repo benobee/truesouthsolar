@@ -64,7 +64,7 @@ const homepage = {
                 TweenMax.to(content, 0.6, { opacity: 1 });
                 TweenMax.to(image, 0.4, { opacity: 1, scale: 1, delay: 0.3 });
             },
-            surfaceVisible: 0.5
+            surfaceVisible: 0.8
         });        
     },
     services() {
