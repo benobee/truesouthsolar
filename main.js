@@ -45,12 +45,16 @@ class App_Build {
 		modules.carousel.init();
 
 		/* modal init (products) */
-		modules.modal.init();			
+		modules.modal.init();
+
+		$(window).on("load", () => {
+			setTimeout(() => {
+				$('#loader').addClass('hide');
+			}, 500);
+		});	
 	}
 }
 
 const App = new App_Build();
 
 window._App = App;
-
-

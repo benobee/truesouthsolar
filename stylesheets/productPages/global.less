@@ -1,41 +1,62 @@
-//advantage, helix
-#collection-58c1ade037c581ac65ceead6, #collection-58c1d2beb8a79bc99bfe5f19{
-  	.Index-page{
-	    display:flex;
-	    align-items:center;
-	    min-height:70vh !important;
-		.Index-page-content{
-			.image-card.sqs-dynamic-text-container{
-				opacity:0;
-			}
-		}
-	}
-	.Index-page:last-child{
-		.Index-page-content{
-			opacity:0;
-		}		
-	}
+#collection-58c1ade037c581ac65ceead6, #collection-58c1d2beb8a79bc99bfe5f19 {
+    .Index-page {
+        display: flex;
+        align-items: center;
+        min-height: 70vh !important;
+        .Index-page-content {
+            .image-card.sqs-dynamic-text-container {
+                opacity: 0;
+            }
+        }
+    }
+    .Index-page:last-child {
+        .Index-page-content {
+            opacity: 0;
+        }
+    }
 }
 
-//sonnen
-#collection-58c204a0440243d83e88e96f{
-  	.Index-page{
-		.Index-page-content{
-			.image-card.sqs-dynamic-text-container{
-				opacity:0;
-			}
-		}
-	}
-	.Index-page:last-child{
-		.Index-page-content{
-			opacity:0;
-		}		
-	}
-}
-
-//advantage page content
-#solid-copper-solid-results, #low-bills-meet-high-design, #the-hardest-working-system-under-the-sun, #get-the-industrys-best-warranty, #technical-specifications{
-	.Index-page-content{
-		opacity:0;
-	}
+#collection-58c1ade037c581ac65ceead6, #collection-58c1c989ff7c50dd0e56cdef, #collection-58c1d2beb8a79bc99bfe5f19, #collection-58c204a0440243d83e88e96f {
+    .Index-page:first-child {
+        .Index-page-content {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) !important;
+        }
+        h1 {
+            margin: 0 !important;
+        }
+        p {
+            margin-top: 0 !important;
+            font-size: 1.6em !important;
+        }
+    }
+    .Index-page {
+        min-height: 50vh;
+        .design-layout-card {
+            .image-card-wrapper {
+                background: none;
+                .sqs-dynamic-text-container {
+                    .image-title-wrapper {
+                        text-align: left;
+                        p {
+                            font-family: din-condensed-web;
+                            color: @brand-color !important;
+                            font-weight: 300;
+                        }
+                    }
+                    .image-subtitle-wrapper p {
+                        line-height: 1.5em;
+                        font-size: 1.4em !important;
+                        font-weight: 100;
+                        text-align: left;
+                        font-family: freight-sans-pro;
+                    }
+                }
+            }
+            .image-overlay {
+                background: none;
+            }
+        }
+    }
 }
