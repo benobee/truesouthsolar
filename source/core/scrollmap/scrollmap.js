@@ -140,9 +140,6 @@ const Scrollmap = {
   events() {
   	//initial check on page load to see if elements are visible
     $(window).on("load", () => {
-
-      console.log("Scrollmap loaded");
-
       this.points.forEach((point) => {
         this.checkVisible(point);
       });

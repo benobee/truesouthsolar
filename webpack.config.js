@@ -7,7 +7,6 @@ const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 
-
 /****************************************/
 /********    CONFIG OBJECT      *********/
 /****************************************/
@@ -17,7 +16,6 @@ const WEBPACK_CONFIG = { module: {} };
 const isProduction = JSON.parse(process.env.PROD_ENV || '0'); //set 1 for production, 0 for development
 
 
-
 /****************************************/
 /********     ENVRIONMENTS      *********/
 /****************************************/
@@ -25,7 +23,6 @@ const isProduction = JSON.parse(process.env.PROD_ENV || '0'); //set 1 for produc
 
 const PRODUCTION = process.env.PROD_ENV === 'production';
 const DEVELOPMENT = process.env.PROD_ENV === 'development';
-
 
 
 /***************************************/
@@ -63,7 +60,9 @@ Object.assign(WEBPACK_CONFIG, input);
 
 const rules = [];
 
-//babel
+/*********************/
+
+// @rule: Babel
 const babel = {
     test: /\.js$/, 
     exclude: /node_modules/,
@@ -79,7 +78,9 @@ const babel = {
 
 rules.push(babel);
 
-//less
+/*********************/
+
+// @rule: extract all less, compile and apply post css prefixing
 const lessLoader = {
     test: /\.less$/, 
     exclude: /node_modules/,
@@ -87,7 +88,10 @@ const lessLoader = {
         fallback: 'style-loader',
         loader: [
             {
-                loader: 'css-loader'
+                loader: 'css-loader',
+            },
+            {
+                loader: 'postcss-loader',
             },
             {
                 loader: 'less-loader',
@@ -98,18 +102,49 @@ const lessLoader = {
 
 rules.push(lessLoader);
 
-//json
+/*********************/
+
+// @rule: css autoprefixer
+const postCSSLoader = {
+    test: /\.css$/,
+    use: [
+      'style-loader',
+      {
+        loader: 'postcss-loader',
+      }
+    ]
+};
+
+rules.push(postCSSLoader);
+
+/*********************/
+
+// @rule: json
 const jsonLoader = { 
     test: /\.json$/,
     use: [
         {
-            loader: "json-loader"
+            loader: "json-loader",
         }
     ]
 };
 
 rules.push(jsonLoader);
 
+/*********************/
+ 
+// @rule: eslint
+const eslintLoader = {
+    test: /\.jsx?$/, // both .js and .jsx
+    loader: 'eslint-loader',
+    include: '/source',
+    enforce: 'pre',
+    options: {
+      fix: true,
+    }
+};
+
+rules.push(eslintLoader);
 
 WEBPACK_CONFIG.module.rules = rules;
 
@@ -126,8 +161,9 @@ WEBPACK_CONFIG.module.rules = rules;
 
 const plugins = [];
 
+/*********************/
 
-
+// @plugin: node env
 const nodeENV = new webpack.DefinePlugin({
   'process.env': {
     NODE_ENV: JSON.stringify('production')
@@ -136,40 +172,44 @@ const nodeENV = new webpack.DefinePlugin({
 
 isProduction ? plugins.push(nodeENV) : false;
 
+/*****************************/
 
-
-//es6 linting loader
+// @plugin: es6 linting loader
 const loaderOptions = new webpack.LoaderOptionsPlugin({
   test: /.js$/,
   exclude: /node_modules/,
-  loader: "eslint-loader"
+  use: [
+    {
+        loader: "eslint-loader"
+    }
+  ]
 });
 
 plugins.push(loaderOptions);
 
+/**********************/
 
-
-//compile all less files into master CSS
+// @plugin: compile all less files into master CSS
 const CSSBundle = new ExtractTextPlugin({ 
     filename: isProduction ? "[name].[hash].bundle.css" : "bundle.css"
 });
 
 plugins.push(CSSBundle);
 
+/*********************/
 
-
-//extend jquery for jquery plugins
+// @plugin: extend jquery for jquery plugins
 const jQueryExtend = new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery"
+    $: "jquery",
+    jQuery: "jquery",
+    "window.jQuery": "jquery"
 });
 
 plugins.push(jQueryExtend);
 
+/*********************/
 
-
-//handling es6 promises
+// @plugin: handling es6 promises
 const promises = new webpack.ProvidePlugin({
     'Promise': 'es6-promise', 
     'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
@@ -177,9 +217,20 @@ const promises = new webpack.ProvidePlugin({
 
 plugins.push(promises);
 
+/*********************/
 
+// @plugin: post CSS
+const postCSS = [
+    require('autoprefixer')
+]
 
-//for minifying javascript
+postCSS.forEach((item) => {
+    plugins.push(item);
+});
+
+/*********************/
+
+// @plugin: for minifying javascript
 const minify = new webpack.optimize.UglifyJsPlugin({
     compress: { 
         warnings: false 

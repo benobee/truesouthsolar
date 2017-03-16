@@ -40,6 +40,7 @@ class App_Build {
 		modules.animation.homepage.init();
 		modules.animation.productIndex.init();
 		modules.animation.productPages.init();
+		modules.animation.globalPages.init();
 
 		/* carousel init (testimonials) */
 		modules.carousel.init();
