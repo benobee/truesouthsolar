@@ -13,7 +13,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 
 const WEBPACK_CONFIG = { module: {} };
-const isProduction = JSON.parse(process.env.PROD_ENV || '0'); //set 1 for production, 0 for development
+const isProduction = JSON.parse(process.env.PROD_ENV || '1'); //set 1 for production, 0 for development
 
 
 /****************************************/
